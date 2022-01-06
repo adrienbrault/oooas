@@ -27,7 +27,7 @@ class Extensions implements ArrayAccess
      * @return bool
      */
     #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->items[$this->normalizeOffset($offset)]);
     }
@@ -41,7 +41,7 @@ class Extensions implements ArrayAccess
      * @return mixed can return all value types
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (!$this->offsetExists($offset)) {
             throw new ExtensionDoesNotExistException("[{$offset}] is not a valid extension.");
@@ -58,7 +58,7 @@ class Extensions implements ArrayAccess
      * @param mixed $value
      */
     #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if ($value === static::X_EMPTY_VALUE) {
             $this->offsetUnset($offset);
@@ -76,7 +76,7 @@ class Extensions implements ArrayAccess
      * @param mixed $offset
      */
     #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         if (!$this->offsetExists($offset)) {
             return;
